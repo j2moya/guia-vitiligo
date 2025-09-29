@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo } from 'react';
 import { VITILIGO_DATA } from './constants';
 import { Header } from './components/Header';
@@ -34,6 +33,12 @@ const App: React.FC = () => {
     }, []);
 
     const selectedSignsCount = useMemo(() => Object.values(selections).filter(Boolean).length, [selections]);
+
+    const selectedSignNames = useMemo(() => {
+        return VITILIGO_DATA.flatMap(category => category.signs)
+            .filter(sign => selections[sign.id])
+            .map(sign => sign.name);
+    }, [selections]);
 
     return (
         <div className="min-h-screen bg-slate-100 font-sans">
@@ -76,7 +81,7 @@ const App: React.FC = () => {
                     </button>
                 </div>
 
-                {showResults && <Results />}
+                {showResults && <Results selectedSigns={selectedSignNames} />}
                 
                 <footer className="text-center mt-12 text-slate-500 text-sm">
                     <p>Esta aplicación es una guía informativa y no reemplaza el consejo médico profesional.</p>

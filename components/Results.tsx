@@ -1,8 +1,24 @@
-
 import React from 'react';
-import { Lightbulb, ShieldCheck, Stethoscope } from 'lucide-react';
+import { Lightbulb, ShieldCheck, Stethoscope, MessageSquare } from 'lucide-react';
 
-export const Results: React.FC = () => {
+interface ResultsProps {
+    selectedSigns: string[];
+}
+
+export const Results: React.FC<ResultsProps> = ({ selectedSigns }) => {
+    const phoneNumber = '17865644249';
+    const messageIntro = 'Hola, vengo de la Guía Visual de Vitiligo. ';
+    let fullMessage = messageIntro;
+
+    if (selectedSigns.length > 0) {
+        const selectedSignsText = selectedSigns.join(', ');
+        fullMessage += `He seleccionado los siguientes signos: ${selectedSignsText}. Me gustaría tener más detalles.`;
+    } else {
+        fullMessage += 'No he seleccionado ningún signo, pero me gustaría tener más detalles.';
+    }
+
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
+
     return (
         <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200 animate-fade-in">
             <h2 className="text-2xl font-bold text-center mb-6 text-slate-800">Interpretación y Pasos a Seguir</h2>
@@ -30,7 +46,17 @@ export const Results: React.FC = () => {
                 </div>
             </div>
             <div className="text-center mt-8">
-                <p className="text-slate-500">Recuerda, esta es una guía educativa. Consulta siempre a un profesional de la salud para obtener un diagnóstico y tratamiento.</p>
+                <p className="text-slate-500 mb-6">Recuerda, esta es una guía educativa. Consulta siempre a un profesional de la salud para obtener un diagnóstico y tratamiento.</p>
+                <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-green-500 text-white font-bold py-3 px-8 rounded-full hover:bg-green-600 transition-colors duration-300 text-lg shadow-lg transform hover:scale-105"
+                    aria-label="Contactar por WhatsApp para más detalles"
+                >
+                    <MessageSquare className="h-5 w-5" />
+                    Más detalles
+                </a>
             </div>
         </div>
     );
