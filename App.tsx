@@ -1,59 +1,95 @@
 
-import React, { useState, useCallback } from 'react';
-import type { ConferencePlan } from './types';
-import Planner from './components/Planner';
-import Player from './components/Player';
-import PrintView from './components/PrintView';
-
-type AppView = 'planning' | 'playing' | 'printing';
+import React, { useState, useCallback, useMemo } from 'react';
+import { VITILIGO_DATA } from './constants';
+import { Header } from './components/Header';
+import { Introduction } from './components/Introduction';
+import { NailSignCard } from './components/NailSignCard';
+import { Results } from './components/Results';
+import { NailCategory } from './types';
+import { ChevronUp, ChevronDown } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<AppView>('planning');
-  const [plan, setPlan] = useState<ConferencePlan | null>(null);
+    const [selections, setSelections] = useState<Record<string, boolean>>({});
+    const [showResults, setShowResults] = useState<boolean>(false);
+    const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>(() => {
+        const initialState: Record<string, boolean> = {};
+        VITILIGO_DATA.forEach((category, index) => {
+            initialState[category.id] = index === 0; // Expand the first category by default
+        });
+        return initialState;
+    });
 
-  const handlePlanCreated = useCallback((newPlan: ConferencePlan) => {
-    setPlan(newPlan);
-    setView('playing');
-  }, []);
+    const handleToggleSelection = useCallback((id: string) => {
+        setSelections(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    }, []);
+    
+    const handleToggleCategory = useCallback((id: string) => {
+        setExpandedCategories(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    }, []);
 
-  const handleEndSession = useCallback(() => {
-    setView('planning');
-    setPlan(null);
-  }, []);
+    const selectedSignsCount = useMemo(() => Object.values(selections).filter(Boolean).length, [selections]);
 
-  const handleGoToPrint = useCallback(() => {
-    if (plan) {
-      setView('printing');
-    }
-  }, [plan]);
+    const selectedSignNames = useMemo(() => {
+        return VITILIGO_DATA.flatMap(category => category.signs)
+            .filter(sign => selections[sign.id])
+            .map(sign => sign.name);
+    }, [selections]);
 
-  const renderView = () => {
-    switch (view) {
-      case 'playing':
-        return plan && <Player plan={plan} onEndSession={handleEndSession} onGoToPrint={handleGoToPrint} />;
-      case 'printing':
-        return plan && <PrintView plan={plan} onBack={() => setView('playing')} />;
-      case 'planning':
-      default:
-        return <Planner onPlanCreated={handlePlanCreated} />;
-    }
-  };
+    return (
+        <div className="min-h-screen bg-slate-100 font-sans">
+            <Header />
+            <main className="container mx-auto p-4 md:p-8 max-w-5xl">
+                <Introduction />
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-slate-800 font-sans p-4 sm:p-6 lg:p-8">
-      <main className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 no-print">
-          <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
-            Conference Timekeeper
-          </h1>
-          <p className="text-gray-400 mt-2">Structure your presentations with precision and focus.</p>
+                <div className="space-y-6 my-8">
+                    {VITILIGO_DATA.map((category: NailCategory) => (
+                        <div key={category.id} className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300">
+                            <button
+                                className="w-full p-4 md:p-6 text-left flex justify-between items-center bg-slate-50 hover:bg-slate-100 focus:outline-none"
+                                onClick={() => handleToggleCategory(category.id)}
+                            >
+                                <h2 className="text-xl md:text-2xl font-bold text-slate-700">{category.title}</h2>
+                                {expandedCategories[category.id] ? <ChevronUp className="h-6 w-6 text-slate-600" /> : <ChevronDown className="h-6 w-6 text-slate-600" />}
+                            </button>
+                            {expandedCategories[category.id] && (
+                                <div className="p-4 md:p-6 space-y-4 border-t border-slate-200">
+                                    {category.signs.map(sign => (
+                                        <NailSignCard
+                                            key={sign.id}
+                                            sign={sign}
+                                            isSelected={selections[sign.id] || false}
+                                            onToggle={handleToggleSelection}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+
+                <div className="text-center my-10">
+                    <button
+                        onClick={() => setShowResults(true)}
+                        className="bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-700 transition-colors duration-300 text-lg shadow-lg transform hover:scale-105"
+                    >
+                        {selectedSignsCount > 0 ? `Ver Explicación (${selectedSignsCount} seleccionados)` : 'Ver Explicación'}
+                    </button>
+                </div>
+
+                {showResults && <Results selectedSigns={selectedSignNames} />}
+                
+                <footer className="text-center mt-12 text-slate-500 text-sm">
+                    <p>Esta aplicación es una guía informativa y no reemplaza el consejo médico profesional.</p>
+                </footer>
+            </main>
         </div>
-        <div className="transition-all duration-500">
-          {renderView()}
-        </div>
-      </main>
-    </div>
-  );
+    );
 };
 
 export default App;

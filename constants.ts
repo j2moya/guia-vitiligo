@@ -29,7 +29,7 @@ export const VITILIGO_DATA: NailCategory[] = [
              { id: 'koebner-mas-5', name: 'Señales Koebner mas de 5', description: 'Más de 5 nuevas lesiones han aparecido debido al fenómeno de Koebner.', meaning: 'Pronostico reservado grado 3.', imageUrl: `${BASE_IMG_URL}vit112.jpg` },
              { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'Una zona de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 1.', imageUrl: `${BASE_IMG_URL}vit113.jpg` },
              { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'De 2 a 5 zonas de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 2.', imageUrl: `${BASE_IMG_URL}vit113-2.jpg` },
-             { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'Mas de 5 zonas de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 3.', imageUrl: `${BASE_IMG_URL}vit113-3.jpg` },
+             { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'Mas de 5 zonas de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 3.', imageUrl: `${BASE_IMG_URL}vit113-3.jpg` },     
         ]
     },
     {

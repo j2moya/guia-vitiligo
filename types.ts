@@ -1,21 +1,14 @@
-export enum MediaType {
-  YouTube = 'YOUTUBE',
-  Video = 'VIDEO',
-  Audio = 'AUDIO',
-  None = 'NONE'
+
+export interface NailSign {
+  id: string;
+  name: string;
+  description: string;
+  meaning: string;
+  imageUrl: string;
 }
 
-export interface Segment {
+export interface NailCategory {
   id: string;
   title: string;
-  subtitle: string;
-  mediaUrl: string;
-  relatedLink: string;
-}
-
-export interface ConferencePlan {
-  id: string;
-  title: string;
-  totalDurationMinutes: number;
-  segments: Segment[];
+  signs: NailSign[];
 }
