@@ -1,5 +1,5 @@
 {
-  "name": "guía-visual-de-vitiligo",
+  "name": "copy-of-conference-timekeeper",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +11,7 @@
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "lucide-react": "^0.544.0"
+    "@google/genai": "^1.21.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

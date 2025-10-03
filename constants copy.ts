@@ -15,6 +15,7 @@ export const VITILIGO_DATA: NailCategory[] = [
             { id: 'leucotriquia', name: 'Leucotriquia (Pelos blancos)', description: 'El vello o cabello que crece dentro de las manchas de vitiligo se vuelve blanco o gris.', meaning: 'Daño profundo con perdidas avanzadas de la despigmentación.', imageUrl: `${BASE_IMG_URL}vit104.jpg` },
             { id: 'senales-atrofia', name: 'Señales de atrofia', description: 'La piel dentro de la mancha se vuelve más delgada, frágil o con una apariencia arrugada.', meaning: 'Sucede con el uso desmedido de medicamentos.', imageUrl: `${BASE_IMG_URL}vit105.jpg` },
             { id: 'islotes-pigmentados', name: 'Islotes pigmentados', description: 'Aparición de "islas" de piel con color normal o repigmentada dentro de una mancha más grande.', meaning: 'Señales de recuperación gradual.', imageUrl: `${BASE_IMG_URL}vit106.jpg` },
+            { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'Una zona de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 1,2 o 3.', imageUrl: `${BASE_IMG_URL}vit113.jpg` },
         ]
     },
     {
@@ -27,9 +28,6 @@ export const VITILIGO_DATA: NailCategory[] = [
              { id: 'koebner-menos-2', name: 'Señales Koebner 2 o menos', description: 'Aparición de 2 o menos nuevas lesiones en zonas de trauma, como rasguños o presión.', meaning: 'Pronostico reservado grado 1.', imageUrl: `${BASE_IMG_URL}vit110.jpg` },
              { id: 'koebner-2-5', name: 'Señales Koebner 2 a 5', description: 'Entre 2 y 5 nuevas lesiones han aparecido en zonas de trauma.', meaning: 'Pronostico reservado grado 2.', imageUrl: `${BASE_IMG_URL}vit111.jpg` },
              { id: 'koebner-mas-5', name: 'Señales Koebner mas de 5', description: 'Más de 5 nuevas lesiones han aparecido debido al fenómeno de Koebner.', meaning: 'Pronostico reservado grado 3.', imageUrl: `${BASE_IMG_URL}vit112.jpg` },
-             { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'Una zona de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 1.', imageUrl: `${BASE_IMG_URL}vit113.jpg` },
-             { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'De 2 a 5 zonas de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 2.', imageUrl: `${BASE_IMG_URL}vit113-2.jpg` },
-             { id: 'halo-hipopigmentado', name: 'Halo hipopigmentado', description: 'Mas de 5 zonas de color intermedio (más claro que la piel normal pero más oscuro que la mancha) rodea la lesión principal.', meaning: 'Pronostico reservado grado 3.', imageUrl: `${BASE_IMG_URL}vit113-3.jpg` },
         ]
     },
     {
